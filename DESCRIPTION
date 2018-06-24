@@ -1,0 +1,22 @@
+Package: Mmisc
+Type: Package
+Title: Some Helper Functions for Michael's Code
+Version: 0.1.0
+Author: Michael Pinus
+Maintainer: Michael Pinus <pinusm@post.bgu.ac.il>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: private use
+Encoding: UTF-8
+LazyData: true
+Imports: tidyverse,
+    psych,
+    apa,
+    BayesMed,
+    GGally,
+    ggplot2,
+    readr,
+    stringr,
+    writexl,
+    dplyr,
+    magrittr
