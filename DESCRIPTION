@@ -19,6 +19,5 @@ Imports: tidyverse,
     stringr,
     writexl,
     dplyr,
-    magrittr
     magrittr,
     stats
