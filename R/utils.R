@@ -4,6 +4,8 @@ is.defined <- function(sym) {
     exists(sym, env)
 }
 
+`%not_in%` <- Negate(`%in%`)
+
 view <- View
 
 omit.na <- stats::na.omit
