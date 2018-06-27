@@ -16,6 +16,18 @@ lm_with_cor <- function(data, mapping, ..., method = "pearson") {
         )
 }
 
+
+multi.tests <- function(fun = apa::t_test, df, vars, group.var, ...) {
+    sapply(simplify = FALSE,                                    # sapply(simplify=T) better, elements named
+           vars,                                                # loop on vector of outcome variable names
+           function(var) {
+               formula <- stats::as.formula(paste(var, "~", group.var))# create a formula with outcome and grouping var.
+               fun(data = df, formula, ...)                     # perform test with a given fun, default t.test
+           }
+    )
+}
+
+
 # correlation with Bayes, and sample size
 cor.bf <- function(data) {
     data      <- stats::na.omit(data)

@@ -90,16 +90,6 @@ chi_prop_diff_report <- function(var_d){
     return(paste0("*F*$\\textsubscript{(",DFnum,",",DFdenom,")}$ = ",round(var_d$statistic,2),", ", pvalue))
 }
 
-
-multi.tests <- function(fun = t_test, df, vars, group.var, ...) {
-    sapply(simplify = FALSE,                                    # sapply(simplify=T) better, elements named
-           vars,                                                # loop on vector of outcome variable names
-           function(var) {
-               formula <- stats::as.formula(paste(var, "~", group.var))# create a formula with outcome and grouping var.
-               fun(data = df, formula, ...)                     # perform test with a given fun, default t.test
-           }
-    )
-}
 # give M and SD per group, with the 'apa' package, on the results of t_test()
 apa.desc <- function(t_test, x){
     group <- as.character(x)
