@@ -20,4 +20,5 @@ Imports: tidyverse,
     writexl,
     dplyr,
     magrittr
+    magrittr,
     stats
