@@ -6,7 +6,7 @@ is.defined <- function(sym) {
 
 view <- View
 
-omit.na <- na.omit
+omit.na <- stats::na.omit
 
 quick.csv <- function(x) {
     name <- deparse(substitute(x))

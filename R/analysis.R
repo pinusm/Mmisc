@@ -18,11 +18,11 @@ lm_with_cor <- function(data, mapping, ..., method = "pearson") {
 
 # correlation with Bayes, and sample size
 cor.bf <- function(data) {
-    data      <- na.omit(data)
+    data      <- stats::na.omit(data)
     x.name    <- names(data)[1]
     y.name    <- names(data)[2]
-    cor_obj   <- cor.test(as.numeric(data[[1]]),as.numeric(data[[2]]))
-    n_obj     <-  min(nrow(na.omit(data[,1])), nrow(na.omit(data[,2])))
+    cor_obj   <- stats::cor.test(as.numeric(data[[1]]),as.numeric(data[[2]]))
+    n_obj     <-  min(nrow(stats::na.omit(data[,1])), nrow(stats::na.omit(data[,2])))
     bf_obj    <- BayesMed::jzs_cor(data[[1]], data[[2]])
     return(list(bf = bf_obj, cor = cor_obj, n = n_obj))
 }
