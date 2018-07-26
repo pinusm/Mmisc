@@ -102,10 +102,13 @@ apa.desc <- function(t_test, x){
 #report correlation with BF, created by cor.bf()
 report_cor.bf <- function(corObject , BF01 = F) {
     BFtype <- "10"
-    BFvalue <- corObject$bf$BayesFactor
+    BFvalue <- ifelse("jzs_med" %in% class(corObject$bf), corObject$bf$BayesFactor,
+                      ifelse("BFBayesFactor" %in% class(corObject$bf),corObject$bf@bayesFactor$bf,
+                             NA)
+    )
     if (BF01) {
         BFtype <- "01"
-        BFvalue <- 1 / corObject$bf$BayesFactor
+        BFvalue <- 1 / BFvalue
     }
 
     paste0(apa::apa(corObject$cor),", $\\textit{BF}_\\textit{",BFtype,"}$ = ",BFvalue %>% round(2))
