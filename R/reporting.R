@@ -103,7 +103,7 @@ apa.desc <- function(t_test, x){
 report_cor.bf <- function(corObject , BF01 = F) {
     BFtype <- "10"
     BFvalue <- ifelse("jzs_med" %in% class(corObject$bf), corObject$bf$BayesFactor,
-                      ifelse("BFBayesFactor" %in% class(corObject$bf),corObject$bf@bayesFactor$bf,
+                      ifelse("BFBayesFactor" %in% class(corObject$bf),extractBF(corObject$bf)$bf, #corObject$bf@bayesFactor$bf,
                              NA)
     )
     if (BF01) {
