@@ -176,3 +176,13 @@ plot_trend_lines <- function(data, mapping, ...){
     p
 }
 
+pvalue.stars <- function (p)
+{
+    p <- p %>% as.numeric
+    pstar = dplyr::case_when(
+        p < 0.001 ~ "***",
+        p < 0.01 ~ "**",
+        p < 0.05 ~ "*",
+        TRUE ~ "")
+    return(pstar)
+}
