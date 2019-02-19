@@ -1,3 +1,7 @@
+#' convert numeric p-values to strings for reporting, without leading zero
+#' @param p a p-value in numeric value
+#' @export
+
 pvalue.correct <- function(p){
     p <- p %>% as.numeric
     pvalue = dplyr::case_when(p < 0.001 ~ "< .001",
@@ -8,12 +12,19 @@ pvalue.correct <- function(p){
     return(pvalue)
 }
 
-
-#ggplot2 APA-style theme
-windowsFonts(Times = windowsFont("TT Times New Roman"))
-#modified version of papaja's theme_apa()
+#' ggplot2 APA-style
+#'
+#' theme modified version of papaja's theme_apa()
+#'
+#' @param base_size  base_size
+#' @param base_family  base_family
+#' @param box box
+#' @importFrom grDevices windowsFonts
+#' @export
+#
 theme_apa <- function(base_size = 14, base_family = "", box = FALSE)
 {
+    grDevices::windowsFonts(Times = grDevices::windowsFont("TT Times New Roman"))
     adapted_theme <- ggplot2::theme_bw(base_size, base_family) +
         ggplot2::theme(plot.title = ggplot2::element_text(size = ggplot2::rel(1.1),
                                                           margin = ggplot2::margin(0, 0, ggplot2::rel(14),
@@ -49,7 +60,10 @@ theme_apa <- function(base_size = 14, base_family = "", box = FALSE)
     adapted_theme
 }
 
-#report pvalues
+#' convert string p-values to strings for reporting, without leading zero
+#' @param p a p-value in string value
+#' @export
+
 pvalue.report <- function(p){
     pvalue <- p %>% formatC(digits = 2, format = "f")
     if (p < 0.001) {
@@ -68,21 +82,33 @@ pvalue.report <- function(p){
     paste0("*p*", pvalue)
 }
 
-#report cocor's different of correlations
+#' report cocor's different of correlations
+#' @param cor_p a cocor object
+#' @export
+#'
+
 cor_diff_report <- function(cor_p){
     pvalue <- pvalue.report(cor_p$fisher1925$p.value)
     cohensQ <- round(psych::fisherz(cor_p$fisher1925$estimate[1]) - psych::fisherz(cor_p$fisher1925$estimate[2]),2)
     return(paste0("*z* = ",round(cor_p$fisher1925$statistic,2),", ", pvalue, ", *Cohen's q* = ", cohensQ))
 }
 
-#report var.test's different of variances
+#' report var.test's different of variances
+#' @param var_d a var.test's different of variances object
+#' @export
+
 var_diff_report <- function(var_d){
     pvalue <- pvalue.report(var_d$p.value)
     DFnum <- var_d$parameter[["num df"]]
     DFdenom <- var_d$parameter[["denom df"]]
     return(paste0("*F*$\\textsubscript{(",DFnum,",",DFdenom,")}$ = ",round(var_d$statistic,2),", ", pvalue))
 }
-#report chi-square different of proportions
+
+#' report chi-square different of proportions
+#' @param var_d a chi-square different of proportions object
+#' @export
+
+
 chi_prop_diff_report <- function(var_d){
     pvalue <- pvalue.report(var_d$p.value)
     DFnum <- var_d$parameter[["num df"]]
@@ -90,7 +116,12 @@ chi_prop_diff_report <- function(var_d){
     return(paste0("*F*$\\textsubscript{(",DFnum,",",DFdenom,")}$ = ",round(var_d$statistic,2),", ", pvalue))
 }
 
-# give M and SD per group, with the 'apa' package, on the results of t_test()
+#' give M and SD per group, with the 'apa' package, on the results of t_test()
+#'
+#' @param t_test an apa::t_test object
+#' @param x the name of a group in the apa::t_test object
+#' @export
+
 apa.desc <- function(t_test, x){
     group <- as.character(x)
     group_data <- t_test$data[[group]]
@@ -99,7 +130,12 @@ apa.desc <- function(t_test, x){
     return(paste0("(*M* = ",round(mean,2),", *SD* = ", round(sd,2),")"))
 }
 
-#report correlation with BF, created by cor.bf()
+#' report correlation with BF, created by cor.bf()
+#'
+#' @param corObject a cor.bf() object
+#' @param BF01 should the BF be 10, or 01 based
+#' @export
+
 report_cor.bf <- function(corObject , BF01 = F) {
     BFtype <- "10"
     BFvalue <- ifelse("jzs_med" %in% class(corObject$bf), corObject$bf$BayesFactor,
@@ -114,8 +150,13 @@ report_cor.bf <- function(corObject , BF01 = F) {
     paste0(apa::apa(corObject$cor),", $\\textit{BF}_\\textit{",BFtype,"}$ = ",BFvalue %>% round(2))
 }
 
+#' convert numbers to literal numbers
+#'
+#' based on https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r
+#'
+#' @param x a number in numeric format
+#' @export
 
-#https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r
 numbers2words <- function(x){
     ## Function by John Fox found here:
     ## http://tolstoy.newcastle.edu.au/R/help/05/04/2715.html
@@ -167,7 +208,14 @@ numbers2words <- function(x){
     helper(x)
 }
 
-# a helper for GGally's ggpairs
+
+#' a helper for GGally's ggpairs
+#'
+#' @param data data
+#' @param mapping mapping
+#' @param ... ...
+#' @export
+
 plot_trend_lines <- function(data, mapping, ...){
     p <- ggplot2::ggplot(data = data, mapping = mapping) +
         ggplot2::geom_point() +
@@ -175,6 +223,13 @@ plot_trend_lines <- function(data, mapping, ...){
         ggplot2::geom_smooth(method=lm, fill="#2E2E2E", color="#2E2E2E", ...)
     p
 }
+
+
+#' convert numeric p-values to asterik stars
+#'
+#' @param p a p-value in numeric format
+#' @export
+
 
 pvalue.stars <- function (p)
 {
