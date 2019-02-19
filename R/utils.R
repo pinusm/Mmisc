@@ -14,7 +14,7 @@ is.defined <- function(sym) {
 #' A not_in operator
 #' @param a an object to search if it's in b
 #' @param b an object where to look for object a
-#' @aliases `%not_in%`
+#' @aliases %not_in%
 #' @return bolian. TRUE if a is not %in% b
 #' @export
 
