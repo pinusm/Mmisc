@@ -38,7 +38,7 @@ flipPath <- function(text) {   # flip back-slash to double slahes, and vice-vers
 
 exploreWD <- function() { # Explore the current working directroy in Windows Explorer
     wd <- flipPath(getwd())
-    shell(paste("explorer", wd, sep = " "), intern = TRUE)
+    invisible(suppressWarnings(shell(paste("explorer", wd, sep = " "), intern = TRUE)))
 }
 
 cleanBulidLeftOver <- function(){
