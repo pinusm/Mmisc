@@ -12,18 +12,24 @@ is.defined <- function(sym) {
 }
 
 #' A not_in operator
-#' @param ... ...
-#' @return nothing.
+#' @param a an object to search if it's in b
+#' @param b an object where to look for object a
+#' @aliases `%not_in%`
+#' @return bolian. TRUE if a is not %in% b
 #' @export
-#'
-`%not_in%` <- Negate(`%in%`)
+
+`%out%` <- function(a,b) {
+    ! a %in% b
+}
 
 #' An alias for na.omit
-#' @param ... ...
-#' @return nothing.
+#' @param x an object from which to omit NAs
+#' @return x without the NAs
 #' @export
 
-omit.na <- stats::na.omit
+omit.na <- function(x){
+    stats::na.omit(x)
+}
 
 #' quickly export a data.frame to a CSV file
 #'
