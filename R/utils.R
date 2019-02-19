@@ -6,7 +6,7 @@ is.defined <- function(sym) {
 
 `%not_in%` <- Negate(`%in%`)
 
-view <- View
+#' An alias for na.omit
 
 omit.na <- stats::na.omit
 
