@@ -22,3 +22,4 @@ Imports: tidyverse,
     magrittr,
     stats,
     BayesFactor
+RoxygenNote: 6.1.1
