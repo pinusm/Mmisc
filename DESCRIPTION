@@ -1,7 +1,7 @@
 Package: Mmisc
 Type: Package
 Title: Some Helper Functions for Michael's Code
-Version: 0.3.0
+Version: 0.4.0
 Author: Michael Pinus
 Maintainer: Michael Pinus <pinusm@post.bgu.ac.il>
 Description: More about what it does (maybe more than one line)
