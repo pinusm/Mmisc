@@ -6,16 +6,26 @@ lm_with_cor <- function(data, mapping, ..., method = "pearson") {
     GGally::ggally_smooth_lm(data, mapping, ...) +
         ggplot2::geom_label(
             data = data.frame(
-                x = min(x, na.rm = TRUE),
-                y = max(y, na.rm = TRUE),
-                lab = round(cor, digits = 3)
+                 x = min(x, na.rm = TRUE)
+                ,y = max(y, na.rm = TRUE)
+                #,lab = round(cor, digits = 3)
             ),
-            mapping = ggplot2::aes(x = x, y = y, label = lab),
+            # mapping = ggplot2::aes(x = x, y = y, label = lab),
+            mapping = ggplot2::aes(x = x, y = y, label = round(cor, digits = 3)),
             hjust = 0, vjust = 1,
             size = 5, fontface = "bold"
         )
 }
 
+#' Multiple statistical tests over a group of variables
+#'
+#' @param fun A statistical functions, default is apa::t_test
+#' @param vars A char vector with the names of the dependent variables to test
+#' @param group.var A string with the name of the
+#' @param df A data.frame containing `vars` and `group.var`
+#' @param ... additional parameters to pass to `fun`
+#' @return A list of the results of the statistical test
+#' @export
 
 multi.tests <- function(fun = apa::t_test, df, vars, group.var, ...) {
     sapply(simplify = FALSE,                                    # sapply(simplify=T) better, elements named
