@@ -219,8 +219,8 @@ numbers2words <- function(x){
 plot_trend_lines <- function(data, mapping, ...){
     p <- ggplot2::ggplot(data = data, mapping = mapping) +
         ggplot2::geom_point() +
-        ggplot2::geom_smooth(method=loess, fill="#A4A4A4", color="#A4A4A4", ...) +
-        ggplot2::geom_smooth(method=lm, fill="#2E2E2E", color="#2E2E2E", ...)
+        ggplot2::geom_smooth(method=stats::loess, fill="#A4A4A4", color="#A4A4A4", ...) +
+        ggplot2::geom_smooth(method=stats::lm, fill="#2E2E2E", color="#2E2E2E", ...)
     p
 }
 
