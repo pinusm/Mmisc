@@ -1,3 +1,4 @@
 exportPattern("^[[:alpha:]]+")
 importFrom(magrittr,"%>%")
 export("%not_in%")
+importFrom("stats", "lm", "loess")
