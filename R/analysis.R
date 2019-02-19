@@ -1,4 +1,10 @@
-# for GGally ggdou
+#' internal function for GGally's ggdou, to add a trend line
+#' @param data data
+#' @param mapping mapping
+#' @param ... ...
+#' @param method method
+#' @export
+
 lm_with_cor <- function(data, mapping, ..., method = "pearson") {
     x <- data[[deparse(mapping$x)]]
     y <- data[[deparse(mapping$y)]]
@@ -38,7 +44,12 @@ multi.tests <- function(fun = apa::t_test, df, vars, group.var, ...) {
 }
 
 
-# correlation with Bayes, and sample size
+#' Calculate Pearson correlation, and also the corresponsind Bayes Factor, and sample size
+#'
+#' @param data a data.frame, where only the first and the second columns will be used
+#' @return A list of the results of the statistical test
+#' @export
+
 cor.bf <- function(data) {
     data      <- stats::na.omit(data)
     x.name    <- names(data)[1]
@@ -48,6 +59,13 @@ cor.bf <- function(data) {
     bf_obj    <- BayesFactor::correlationBF(data[[1]], data[[2]]) #%>% BayesFactor::extractBF()
     return(list(bf = bf_obj, cor = cor_obj, n = n_obj))
 }
+
+
+#' Reverse code a 1-4 scale rating
+#'
+#' @param vector a vector to reverse code
+#' @return A reverse coded vector
+#' @export
 
 # reverse coding
 rv4 <- function(vector) {
@@ -60,6 +78,12 @@ rv4 <- function(vector) {
     return(recoded_vector)
 }
 
+#' Reverse code a 1-5 scale rating
+#'
+#' @param vector a vector to reverse code
+#' @return A reverse coded vector
+#' @export
+
 rv5 <- function(vector) {
     vector <- as.numeric(vector)
     recoded_vector <- dplyr::case_when(vector == 1 ~ 5,
@@ -70,6 +94,12 @@ rv5 <- function(vector) {
                                 TRUE ~ vector)
     return(recoded_vector)
 }
+
+#' Reverse code a 1-7 scale rating
+#'
+#' @param vector a vector to reverse code
+#' @return A reverse coded vector
+#' @export
 
 rv7 <- function(vector) {
     vector <- as.numeric(vector)
@@ -84,6 +114,12 @@ rv7 <- function(vector) {
     return(recoded_vector)
 }
 
+#' Reverse code a 0-4 scale rating
+#'
+#' @param vector a vector to reverse code
+#' @return A reverse coded vector
+#' @export
+
 rv5zero <- function(vector) {
     vector <- as.numeric(vector)
     recoded_vector <- dplyr::case_when( vector == 0~ 4,
@@ -95,6 +131,12 @@ rv5zero <- function(vector) {
     return(recoded_vector)
 }
 
+#' Reverse code a 0-3 scale rating
+#'
+#' @param vector a vector to reverse code
+#' @return A reverse coded vector
+#' @export
+
 rv4zero <- function(vector) {
     vector <- as.numeric(vector)
     recoded_vector <- dplyr::case_when(vector == 0 ~ 3,
@@ -105,12 +147,41 @@ rv4zero <- function(vector) {
     return(recoded_vector)
 }
 
+#' Copy Attributes
+#'
+#' This function copies attributes from one object and assigns them to another.
+#'
+#'
+#' @aliases copy.attributes copy.attributes<-
+#' @param from object from which the attributes should be taken
+#' @param to object to which the attributes should be written
+#' @param delete attributes which should not be copied. By default this are
+#' class specific attributes which might cause problems if copied to another
+#' object. But you can add or remove attributes from the vector.
+#' @param delete2 Identical to delete and just added for convenience for the
+#' case that you want to delete additional attributes but do not want to repeat
+#' the vector given in delete. In the function both vectors, delete and
+#' delete2, are just merged to one deletion vector.
+#' @author Jan Philipp Dietrich dietrich AT pik-potsdam.de
+#' @export
+
 copy.attributes <- function(from,to,delete=c('names','row.names','class','dim','dimnames'),delete2=NULL) {
     a <- attributes(from)
     a[c(delete,delete2)] <- NULL
     attributes(to) <- c(attributes(to),a)
     return(to)
 }
+
+#' Reverse code a scale rating
+#'
+#' Reverse code a scale rating vector with either specified or empirical minimum and maximum values, and while keeping or discarding the scale attributes (labels)
+#'
+#' @param vector a vector to reverse code
+#' @param minValue set the minimum value of the scale, if missing, minimum is estimated from the empirical minimum value (what's in the vector)
+#' @param maxValue set the maximum value of the scale, if missing, maximum is estimated from the empirical maximum value (what's in the vector)
+#' @param keepAttr bollian, whether to keep or discard the scale's attributes (labels)
+#' @return A reverse coded vector
+#' @export
 
 rv <- function(vector , minValue = NA, maxValue = NA, keepAttr = FALSE) {
     num_vector <- as.numeric(vector)
