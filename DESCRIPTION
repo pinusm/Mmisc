@@ -21,5 +21,6 @@ Imports: tidyverse,
     dplyr,
     magrittr,
     stats,
-    BayesFactor
+    BayesFactor,
+    grDevices
 RoxygenNote: 6.1.1

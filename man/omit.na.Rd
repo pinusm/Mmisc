@@ -4,13 +4,13 @@
 \alias{omit.na}
 \title{An alias for na.omit}
 \usage{
-omit.na(object, ...)
+omit.na(x)
 }
 \arguments{
-\item{...}{...}
+\item{x}{an object from which to omit NAs}
 }
 \value{
-nothing.
+x without the NAs
 }
 \description{
 An alias for na.omit
