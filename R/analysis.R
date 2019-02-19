@@ -94,3 +94,21 @@ rv4zero <- function(vector) {
                                 TRUE ~ vector)
     return(recoded_vector)
 }
+
+copy.attributes <- function(from,to,delete=c('names','row.names','class','dim','dimnames'),delete2=NULL) {
+    a <- attributes(from)
+    a[c(delete,delete2)] <- NULL
+    attributes(to) <- c(attributes(to),a)
+    return(to)
+}
+
+rv <- function(vector , minValue = NA, maxValue = NA, keepAttr = FALSE) {
+    num_vector <- as.numeric(vector)
+    minV <- ifelse(!is.na(minValue),as.numeric(minValue),min(num_vector,na.rm = T))
+    maxV <- ifelse(!is.na(maxValue),as.numeric(maxValue),max(num_vector,na.rm = T))
+    if(is.na(minValue)){warning(paste0("Minimum value estimated, and set to ",minV))}
+    if(is.na(maxValue)){warning(paste0("Maximum value estimated, and set to ",maxV))}
+    recoded_vector <- maxV + minV - num_vector
+    if(keepAttr){recoded_vector <- copy.attributes(from = vector, to = recoded_vector)}
+    return(recoded_vector)
+}
