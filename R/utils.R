@@ -74,6 +74,55 @@ flipPath <- function(text) {   # flip back-slash to double slahes, and vice-vers
     }
 }
 
+#' Open data.frame (or any R object) in an external app.
+#'
+#' Allows analysis in exteranl Stat apps, such as JASP or jamovi
+#'
+#' @param x a data.frame/tibble
+#' @param app_path a string with the path for the app
+#' @return none
+#' @export
+
+toEXTERNAL <- function(x, app_path) {
+    program_loc <- app_path
+    full_path <- tempfile(fileext = ".csv")
+    readr::write_csv(x, path = full_path, na = "")
+    if (!file.exists(program_loc)){
+        stop("Can't locate program at location")
+    }
+    if (!file.exists(full_path)){
+        stop("Can't create temp file")
+    }
+    xopen::xopen(full_path, app = program_loc, quiet = TRUE)
+}
+
+#' Open data.frame/tibble in an JASP
+#'
+#' Allows analysis in JASP
+#'
+#' @param x a data.frame/tibble
+#' @return none
+#' @export
+
+toJASP <- function(x) {
+    toEXTERNAL(x, app_path = "C:\\Program Files\\JASP\\JASP.exe")
+}
+
+#' Open data.frame/tibble in an jamovi
+#'
+#' Allows analysis in jamovi. Dynamically sets the path to jamovi (might fail if more than one version is installed)
+#'
+#' @param x a data.frame/tibble
+#' @return none
+#' @export
+
+toJAMOVI <- function(x) {
+    listOFprograms <- list.dirs("C:\\Program Files\\", full.names=F, recursive = FALSE)
+    jamoviVersion <- listOFprograms[grep(listOFprograms , pattern = "jamovi*")]
+    program_loc <- paste0("C:\\Program Files\\",jamoviVersion,"\\bin\\jamovi.exe")
+    toEXTERNAL(x, app_path = program_loc)
+}
+
 #' open windows explorer to the working directroy
 #'
 #' @return none
