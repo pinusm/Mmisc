@@ -118,7 +118,7 @@ toJASP <- function(x) {
 
 toJAMOVI <- function(x) {
     listOFprograms <- list.dirs("C:\\Program Files\\", full.names=F, recursive = FALSE)
-    jamoviVersion <- listOFprograms[grep(listOFprograms , pattern = "jamovi*")]
+    jamoviVersion <- listOFprograms[grep(listOFprograms , pattern = "jamovi*")][-1]
     program_loc <- paste0("C:\\Program Files\\",jamoviVersion,"\\bin\\jamovi.exe")
     toEXTERNAL(x, app_path = program_loc)
 }
