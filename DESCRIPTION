@@ -1,12 +1,13 @@
 Package: Mmisc
 Type: Package
 Title: Some Helper Functions for Michael's Code
-Version: 0.5.0
+Version: 0.5.1
 Author: Michael Pinus
 Maintainer: Michael Pinus <pinusm@post.bgu.ac.il>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: MIT + file LICENSE
+Date: 2019-04-30
 Encoding: UTF-8
 LazyData: true
 Imports: 
@@ -26,3 +27,4 @@ Imports:
     grDevices,
     xopen
 RoxygenNote: 6.1.1
+
