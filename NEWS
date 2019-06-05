@@ -1,0 +1,6 @@
+Mmisc v0.6 (Release date: 2019-05-06)
+==============
+
+    Changes:
+
+    * Added rowMeans(), a base::rowMeans() alternative that JUST WORKS inside a dplyr::mutate() call
