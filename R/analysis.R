@@ -193,3 +193,13 @@ rv <- function(vector , minValue = NA, maxValue = NA, keepAttr = FALSE) {
     if(keepAttr){recoded_vector <- copy.attributes(from = vector, to = recoded_vector)}
     return(recoded_vector)
 }
+
+#' rowMeans that JUST WORKS inside a dplyr::mutate() call
+#'
+#' just name the variable to average, and you shall have their mean
+#'
+#' @param ... a list of unquoted variable names
+#' @param na.rm ow to handle NAs
+#' @return A meaned vector
+#' @export
+row_means = function(..., na.rm=TRUE) rowMeans(cbind(...), na.rm=na.rm)
