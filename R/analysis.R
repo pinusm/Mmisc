@@ -203,3 +203,12 @@ rv <- function(vector , minValue = NA, maxValue = NA, keepAttr = FALSE) {
 #' @return A meaned vector
 #' @export
 row_means = function(..., na.rm=TRUE) rowMeans(cbind(...), na.rm=na.rm)
+
+#' rowSums that JUST WORKS inside a dplyr::mutate() call
+#'
+#' just name the variable to sum, and you shall have their sum
+#'
+#' @param ... a list of unquoted variable names
+#' @return A summed vector
+#' @export
+row_sums = function(...) rowSums(cbind(...))
