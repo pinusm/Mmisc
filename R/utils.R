@@ -129,6 +129,21 @@ toJAMOVI <- function(x) {
     toEXTERNAL(x, app_path = program_loc)
 }
 
+#' center a variable
+#'
+#' faster than using scale() as per https://www.gastonsanchez.com/visually-enforced/how-to/2014/01/15/Center-data-in-R/
+#'
+#' @param x a matrix, or an object that can coerced to a matrix (vector)
+#' @return the centered object
+#' @export
+
+center_colmeans <- function(x) {
+    x_mat <- as.matrix(x)
+    xcenter = colMeans(x_mat)
+    x_mat - rep(xcenter, rep.int(nrow(x_mat), ncol(x_mat)))
+}
+
+
 #' open windows explorer to the working directroy
 #'
 #' @return none
