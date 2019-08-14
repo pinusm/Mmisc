@@ -9,7 +9,7 @@ row_means(..., na.rm = TRUE)
 \arguments{
 \item{...}{a list of unquoted variable names}
 
-\item{na.rm}{ow to handle NAs}
+\item{na.rm}{how to handle NAs}
 }
 \value{
 A meaned vector

@@ -199,7 +199,7 @@ rv <- function(vector , minValue = NA, maxValue = NA, keepAttr = FALSE) {
 #' just name the variable to average, and you shall have their mean
 #'
 #' @param ... a list of unquoted variable names
-#' @param na.rm ow to handle NAs
+#' @param na.rm how to handle NAs
 #' @return A meaned vector
 #' @export
 row_means = function(..., na.rm=TRUE) rowMeans(cbind(...), na.rm=na.rm)
@@ -209,6 +209,7 @@ row_means = function(..., na.rm=TRUE) rowMeans(cbind(...), na.rm=na.rm)
 #' just name the variable to sum, and you shall have their sum
 #'
 #' @param ... a list of unquoted variable names
+#' @param na.rm how to handle NAs
 #' @return A summed vector
 #' @export
-row_sums = function(...) rowSums(cbind(...))
+row_sums = function(..., na.rm=TRUE) rowSums(cbind(...), na.rm=na.rm)

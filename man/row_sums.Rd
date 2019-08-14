@@ -4,10 +4,12 @@
 \alias{row_sums}
 \title{rowSums that JUST WORKS inside a dplyr::mutate() call}
 \usage{
-row_sums(...)
+row_sums(..., na.rm = TRUE)
 }
 \arguments{
 \item{...}{a list of unquoted variable names}
+
+\item{na.rm}{how to handle NAs}
 }
 \value{
 A summed vector
