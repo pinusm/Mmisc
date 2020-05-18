@@ -202,7 +202,11 @@ rv <- function(vector , minValue = NA, maxValue = NA, keepAttr = FALSE) {
 #' @param na.rm how to handle NAs
 #' @return A meaned vector
 #' @export
-row_means = function(..., na.rm=TRUE) rowMeans(cbind(...), na.rm=na.rm)
+row_means = function(..., na.rm=TRUE) {
+    res <- rowMeans(cbind(...), na.rm=na.rm)
+    res[is.nan(res)] <- NA
+    res
+}
 
 #' rowSums that JUST WORKS inside a dplyr::mutate() call
 #'
@@ -212,4 +216,8 @@ row_means = function(..., na.rm=TRUE) rowMeans(cbind(...), na.rm=na.rm)
 #' @param na.rm how to handle NAs
 #' @return A summed vector
 #' @export
-row_sums = function(..., na.rm=TRUE) rowSums(cbind(...), na.rm=na.rm)
+row_sums = function(..., na.rm=TRUE) {
+    res <- rowSums(cbind(...), na.rm=na.rm)
+    res[is.nan(res)] <- NA
+    res
+}

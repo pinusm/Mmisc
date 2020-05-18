@@ -1,3 +1,12 @@
+Mmisc v0.7.1 (Release date: 2020-05-18)
+==============
+
+    Changes:
+
+    * Fixed row_means(), now it'll return an NA (and not Nan) if columns are NA.
+    * Fixed row_sums(), now it'll return an NA (and not Nan) if columns are NA.
+
+
 Mmisc v0.6 (Release date: 2019-05-06)
 ==============
 
