@@ -1,7 +1,7 @@
 Package: Mmisc
 Type: Package
 Title: Some Helper Functions for Michael's Code
-Version: 0.7.2
+Version: 0.7.3
 Author: Michael Pinus
 Maintainer: Michael Pinus <pinusm@post.bgu.ac.il>
 Description: More about what it does (maybe more than one line)
@@ -26,4 +26,6 @@ Imports:
     grDevices,
     xopen
 RoxygenNote: 6.1.1
-
+URL: https://github.com/pinusm/Mmisc
+BugReports: https://github.com/pinusm/Mmisc/issues
+Language: en-GB
