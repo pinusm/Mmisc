@@ -162,4 +162,43 @@ cleanBulidLeftOver <- function(){
     if (file.exists("_bookdown.Rmd")) file.remove("_bookdown.Rmd")
 }
 
+#' Inserts some text at the end of the current line
+#' adapted from https://githubmemory.com/repo/rstudio/rstudioapi/issues/218
+#' Note that using ctrl+enter to run this would result in the text being added the the end of the line BELOW.
+#' Use alt+enter instead.
+#'
+#' @return none
+#' @param sign text to be added (a string vector of length 1)
+#' @export
+
+
+endwrite <- function(sign) {
+
+    ctx <- rstudioapi::getSourceEditorContext()
+    current_line <-
+        as.numeric(ctx[["selection"]][[1]][["range"]][["start"]][["row"]])
+    source_id <- ctx$id
+    end_of_line <- rstudioapi::as.document_position(c(current_line, Inf))
+    nextline <- rstudioapi::as.document_position(c(current_line + 1, Inf))
+    rstudioapi::insertText(location = end_of_line, text = sign, id = source_id)
+    rstudioapi::setCursorPosition(position = nextline, id = source_id)
+    # Currently ineffective workaround:
+    rstudioapi::insertText("")
+}
+
+#' Inserts the names of an object below the current cursor location, in a new line.
+#' Note that using ctrl+enter to run this would result in the text being added TWO lines below.
+#' Use alt+enter instead.
+#'
+#' @param x data.frame, or any other object with named elements
+#' @return none
+#' @export
+
+get_names <- function(x){
+    nm <- names(x)
+    nm_newlines <- paste0("\n", nm)
+    nm_length1 <- glue::glue_collapse(nm_newlines)
+    invisible(endwrite(nm_length1))
+    paste0("Names of ", deparse(substitute(x))," were added to source file")
+}
 

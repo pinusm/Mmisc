@@ -5,8 +5,12 @@
 \alias{copy.attributes<-}
 \title{Copy Attributes}
 \usage{
-copy.attributes(from, to, delete = c("names", "row.names", "class",
-  "dim", "dimnames"), delete2 = NULL)
+copy.attributes(
+  from,
+  to,
+  delete = c("names", "row.names", "class", "dim", "dimnames"),
+  delete2 = NULL
+)
 }
 \arguments{
 \item{from}{object from which the attributes should be taken}

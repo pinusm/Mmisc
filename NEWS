@@ -1,3 +1,10 @@
+Mmisc v0.8.0 (Release date: 2021-06-03)
+==============
+
+    Changes:
+
+    * added get_names(), which pastes the names of an object below the current cursor location.
+
 Mmisc v0.7.2 (Release date: 2020-07-03)
 ==============
 
